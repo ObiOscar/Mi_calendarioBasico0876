@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class MiCalendarioBasico here.
+ * La clase ha cambiado. Ahora usa metodos de la clase DisplayDosDigitos. Creo objetos de esa clase.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -8,9 +8,9 @@
 public class MiCalendarioBasico
 {
     // instance variables - replace the example below with your own
-    private int dia;
-    private int mes;
-    private int anno;
+    private DisplayDosDigitos dia;
+    private DisplayDosDigitos mes;
+    private DisplayDosDigitos anno;
     
 
         /**
@@ -18,76 +18,34 @@ public class MiCalendarioBasico
          */
         public MiCalendarioBasico()
         {
-          dia = 1;
-          mes = 1;
-          anno = 1;   
- 
+          dia = new DisplayDosDigitos(31);
+          mes = new DisplayDosDigitos(13);
+          anno = new DisplayDosDigitos(100);  
        }
 
        
 //FIJAMOS LA FECHA INTRODUCIMOS NÚMEROS ENTEROS   
 public void fijarFecha(int nuevoDia, int nuevoMes, int nuevoAno) {
-        dia = nuevoDia;
-        mes = nuevoMes;
-        anno = nuevoAno;
+        dia.setValor(nuevoDia);             //El objeto dia se lo meto al metodo set valor, y marco el nuevo valor
+        mes.setValor(nuevoMes);
+        anno.setValor(nuevoAno);
 }
 
 
 //AVANZAMOS UN DÍA LA FECHA
 public void avanzarFecha() {
-    
-        dia = dia + 1;
-        if (dia == 31) {
-            dia = 1;
-            mes = mes + 1;
-            if (mes == 13) {
-                mes = 1;
-                anno = anno + 1;
-                if (anno == 100) {
-                    dia = 1;
-                    mes = 1;
-                    anno = 1;
-                }
-            }
+        dia.incrementaValor();  
+         if (dia.getValor() == 1) {
+             mes.incrementaValor();  
+             if (mes.getValor() == 1) {
+                   anno.incrementaValor();  
+              }
+          }
         }
-}
+
 
 //Enseño la fecha
-
-public String obtenerFecha() {
-    
-        String muestraDia;
-        String muestraMes;
-        String muestraAnno;
-        
-        if(dia < 10){ 
-            
-            muestraDia = "0" + dia;
-            
-        }
-        else{
-            muestraDia = dia+ "";  
-        }
-        
-        if(mes < 10){ 
-            
-            muestraMes = "0" + mes;
-            
-        }
-        else{
-            muestraMes = mes+ "";  
-        }
-        
-        if(anno < 10){ 
-            
-            muestraAnno= "0" + anno;
-            
-        }
-        else{
-            muestraAnno = anno+ "";  
-        }
-        
-        
-        return muestraDia + "-" + muestraMes + "-" + muestraAnno;
-    }
+public String obtenerFechaComoCadena() {
+		return dia.getValorDelDisplay() + "-" + mes.getValorDelDisplay() + "-" + anno.getValorDelDisplay();
+}
 }
